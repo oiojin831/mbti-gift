@@ -13,21 +13,35 @@ import {
 import DirectionButton from "../components/DirectionButton";
 import Header from "../components/Header";
 import reducer from "../reducer/pageReducer";
+import { getMbti } from "../helpers/mbti";
+import { useRouter } from "next/router";
 
 const ParentsTestPage = () => {
   const [state, dispatch] = useReducer(reducer, {
     page: 1,
     answerList: [],
   });
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.page === 13) {
+      console.log("push");
+      router.push({
+        pathname: "/results",
+        query: {
+          mbti: getMbti(state.answerList),
+        },
+      });
+    }
+  }, [state.page, state.answerList]);
 
   return (
     <Container p={0} h="100vh" overflowY="hidden">
       <Header />
       {state.page === 13 ? (
-        <div>결과</div>
+        <div>{getMbti(state.answerList)}</div>
       ) : (
         <>
-          {" "}
           <Flex p={4}>
             <DirectionButton
               dispatch={dispatch}
@@ -54,13 +68,13 @@ const ParentsTestPage = () => {
               <DirectionButton
                 dispatch={dispatch}
                 type="nextPage"
-                answer={1}
+                answer={questionSheets[state.page - 1].type1}
                 text={questionSheets[state.page - 1].answerText1}
               />
               <DirectionButton
                 dispatch={dispatch}
                 type="nextPage"
-                answer={2}
+                answer={questionSheets[state.page - 1].type2}
                 text={questionSheets[state.page - 1].answerText2}
               />
             </VStack>
