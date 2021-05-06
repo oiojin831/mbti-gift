@@ -100,7 +100,7 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 6,
-    question: [
+    questions: [
       "아들(딸)이랑 같이 보고 싶은 책은?",
       "아들(딸)이랑 같이 보고 싶은 책은?",
     ],
@@ -117,7 +117,7 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 7,
-    question: [
+    questions: [
       "우리 딸(아들)과 사소한 일로 다투었을 때",
       "우리 딸(아들)과 사소한 일로 다투었을 때",
     ],
@@ -134,7 +134,7 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 8,
-    question: [
+    questions: [
       "집에 온 우리 아들(딸)이 풀이 축 죽어 있다 이때 나는",
       "집에 온 우리 아들(딸)이 풀이 축 죽어 있다 이때 나는",
     ],
@@ -151,7 +151,7 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 9,
-    question: [
+    questions: [
       "우리 딸(아들)이 사온 선물이 마음에 들지 않는다 나는",
       "우리 딸(아들)이 사온 선물이 마음에 들지 않는다 나는",
     ],
@@ -168,7 +168,7 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 10,
-    question: [
+    questions: [
       "우리 자식(들)이랑 가족여행을 가게 되었다. ",
       "우리 자식(들)이랑 가족여행을 가게 되었다. ",
     ],
@@ -185,7 +185,7 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 11,
-    question: [
+    questions: [
       "간만에 우리 딸(아들)과의 데이트! 옷은?",
       "간만에 우리 딸(아들)과의 데이트! 옷은?",
     ],
@@ -202,7 +202,7 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 12,
-    question: [
+    questions: [
       "딸(아들)이 '엄마(아빠) 00 어딨어?'라고 하면",
       "딸(아들)이 '엄마(아빠) 00 어딨어?'라고 하면",
     ],
