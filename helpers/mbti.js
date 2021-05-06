@@ -1,14 +1,26 @@
+import data from "../data";
+
+// list -> answerIndexList
 export const getMbti = (list) => {
   let mbti = "";
 
-  const countE = list.filter((char) => char === "E").length;
-  const countI = list.filter((char) => char === "I").length;
-  const countS = list.filter((char) => char === "S").length;
-  const countN = list.filter((char) => char === "N").length;
-  const countT = list.filter((char) => char === "T").length;
-  const countF = list.filter((char) => char === "F").length;
-  const countJ = list.filter((char) => char === "J").length;
-  const countP = list.filter((char) => char === "P").length;
+  // 순서는 변화되서 순서가 일치한다. list -> [0,1,0,1,1,1]
+  const featureList = list.reduce(
+    (result, answerIndex, listIndex) => [
+      ...result,
+      data[listIndex].answers[answerIndex].type,
+    ],
+    []
+  );
+
+  const countE = featureList.filter((char) => char === "E").length;
+  const countI = featureList.filter((char) => char === "I").length;
+  const countS = featureList.filter((char) => char === "S").length;
+  const countN = featureList.filter((char) => char === "N").length;
+  const countT = featureList.filter((char) => char === "T").length;
+  const countF = featureList.filter((char) => char === "F").length;
+  const countJ = featureList.filter((char) => char === "J").length;
+  const countP = featureList.filter((char) => char === "P").length;
 
   if (countE > countI) {
     mbti = mbti + "E";

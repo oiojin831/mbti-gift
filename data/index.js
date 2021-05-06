@@ -1,7 +1,7 @@
 const mfdQuestionSheet1 = [
   {
     id: 0,
-    question: "부모냐 자식이냐?",
+    questions: ["부모냐 자식이냐?"],
     answers: [
       {
         text: "난 자식이양",
@@ -15,7 +15,10 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 1,
-    question: "일이나 집안일이 없는 휴일에 나는",
+    questions: [
+      "일이나 집안일이 없는 휴일에 나는",
+      "일이나 집안일이 없는 휴일에 부모는",
+    ],
     answers: [
       {
         text: "집에서 가족과 또는 혼자만의 시간을 즐긴다",
@@ -29,7 +32,10 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 2,
-    question: "여러 가지 일이 밀려 있을 때 나는",
+    questions: [
+      "여러 가지 일이 밀려 있을 때 나는",
+      "여러 가지 일이 밀려 있을 때 나는",
+    ],
     answers: [
       {
         text: "여러가지 일을 동시에 빠르게 처리한다.",
@@ -43,7 +49,10 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 3,
-    question: "아들(딸)이 고민을 이야기 하면 나는",
+    questions: [
+      "아들(딸)이 고민을 이야기 하면 나는",
+      "아들(딸)이 고민을 이야기 하면 나는",
+    ],
     answers: [
       {
         text: "잘 들어주려고 하는 편이다",
@@ -57,7 +66,10 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 4,
-    question: "길가다가 발견한 꽃을 보고 내가 할 말은?",
+    questions: [
+      "길가다가 발견한 꽃을 보고 내가 할 말은?",
+      "길가다가 발견한 꽃을 보고 내가 할 말은?",
+    ],
     answers: [
       {
         text: "저 꽃은 되게 작고 연한 핑크색으로 예쁘네",
@@ -71,7 +83,10 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 5,
-    question: "자식들이 나에게 주었으면 하는 선물은?",
+    questions: [
+      "자식들이 나에게 주었으면 하는 선물은?",
+      "자식들이 나에게 주었으면 하는 선물은?",
+    ],
     answers: [
       {
         text: "실용성 없지만 예쁘고 기억에 남을 선물",
@@ -85,7 +100,10 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 6,
-    question: "아들(딸)이랑 같이 보고 싶은 책은?",
+    question: [
+      "아들(딸)이랑 같이 보고 싶은 책은?",
+      "아들(딸)이랑 같이 보고 싶은 책은?",
+    ],
     answers: [
       {
         text: "공상과학이나 재밌는 스토리의 소설책",
@@ -99,7 +117,10 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 7,
-    question: "우리 딸(아들)과 사소한 일로 다투었을 때",
+    question: [
+      "우리 딸(아들)과 사소한 일로 다투었을 때",
+      "우리 딸(아들)과 사소한 일로 다투었을 때",
+    ],
     answers: [
       {
         text: "감정적으로 화를 내며 폭풍 잔소리를 한다.",
@@ -113,7 +134,10 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 8,
-    question: "집에 온 우리 아들(딸)이 풀이 축 죽어 있다 이때 나는",
+    question: [
+      "집에 온 우리 아들(딸)이 풀이 축 죽어 있다 이때 나는",
+      "집에 온 우리 아들(딸)이 풀이 축 죽어 있다 이때 나는",
+    ],
     answers: [
       {
         text: "딸(아들) 왜 이렇게 힘이 없어 뭐 때문에 그래?",
@@ -127,7 +151,10 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 9,
-    question: "우리 딸(아들)이 사온 선물이 마음에 들지 않는다 나는",
+    question: [
+      "우리 딸(아들)이 사온 선물이 마음에 들지 않는다 나는",
+      "우리 딸(아들)이 사온 선물이 마음에 들지 않는다 나는",
+    ],
     answers: [
       {
         text: "뭘 이런걸 사오냐 다음부터 물어보고 사라",
@@ -141,7 +168,10 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 10,
-    question: "우리 자식(들)이랑 가족여행을 가게 되었다. ",
+    question: [
+      "우리 자식(들)이랑 가족여행을 가게 되었다. ",
+      "우리 자식(들)이랑 가족여행을 가게 되었다. ",
+    ],
     answers: [
       {
         text: "계획 없이 즉흥적으로 돌아다녀 보자!.",
@@ -155,7 +185,10 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 11,
-    question: "간만에 우리 딸(아들)과의 데이트! 옷은?",
+    question: [
+      "간만에 우리 딸(아들)과의 데이트! 옷은?",
+      "간만에 우리 딸(아들)과의 데이트! 옷은?",
+    ],
     answers: [
       {
         text: "전날에 이미 다 골라놨다.",
@@ -169,7 +202,10 @@ const mfdQuestionSheet1 = [
   },
   {
     id: 12,
-    question: "딸(아들)이 '엄마(아빠) 00 어딨어?'라고 하면",
+    question: [
+      "딸(아들)이 '엄마(아빠) 00 어딨어?'라고 하면",
+      "딸(아들)이 '엄마(아빠) 00 어딨어?'라고 하면",
+    ],
     answers: [
       {
         text: "그걸 어디에 뒀더라..' 한참 고민한다.",

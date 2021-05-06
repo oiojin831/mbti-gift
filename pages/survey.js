@@ -24,13 +24,23 @@ const SurveyPage = ({ data }) => {
 
   useEffect(() => {
     if (state.page === 13) {
-      router.push({
-        pathname: "/results",
-        query: {
-          mbti: getMbti(state.answerList),
-          a: binArrToDec(state.answerList),
-        },
-      });
+      router.query.mbti
+        ? router.push({
+            pathname: `/results`,
+            query: {
+              mbti: router.query.mbti,
+              a: router.query.a,
+              mbti2: getMbti(state.answerList),
+              b: binArrToDec(state.answerList),
+            },
+          })
+        : router.push({
+            pathname: "/results",
+            query: {
+              mbti: getMbti(state.answerList),
+              a: binArrToDec(state.answerList),
+            },
+          });
     }
   }, [state.page, state.answerList]);
 
