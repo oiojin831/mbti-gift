@@ -69,7 +69,7 @@ const SurveyPage = ({ data }) => {
           </Box>
           <Box>
             <VStack justify="space-around" w="100%" h="35vh">
-              <Heading size="md">{data[state.page].question}</Heading>
+              <Heading size="md">{data[state.page].questions[0]}</Heading>
             </VStack>
             <VStack justify="space-around" w="100%" h="35vh">
               <DirectionButton

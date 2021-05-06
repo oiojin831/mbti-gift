@@ -1,7 +1,7 @@
 const mfdQuestionSheet1 = [
   {
     id: 0,
-    questions: ["부모냐 자식이냐?"],
+    questions: ["부모냐 자식이냐?", "자식이냐 부모냐"],
     answers: [
       {
         text: "난 자식이양",

@@ -5,7 +5,6 @@ import {
   Button,
   Heading,
   Text,
-  Center,
   Link as ChakraLink,
 } from "@chakra-ui/react";
 import HeroImage from "../components/HeroImage";
