@@ -20,7 +20,7 @@ const SurveyPage = ({ data }) => {
   const initialState = { page: 0, answerList: [] };
   const [state, dispatch] = useReducer(reducer, initialState);
   const router = useRouter();
-  const isLast = answerList.length === 13;
+  const isLast = state.answerList.length === 13;
 
   useEffect(() => {
     if (state.page === 13) {
