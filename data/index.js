@@ -544,7 +544,7 @@ const mfdResults1 = {
 const mfdTitles1 = [
   {
     type: "parents",
-    title: "어버이날 나의 MBTI는?",
+    title: "원래 엄마/아빠의 MBTI는?",
     am: "아들/딸아 나는 이런 사람이란다.",
     will: "나는 네가 이런 사람으로 자라길 바란단다.",
     hard: "이런 자식은 버겁다..",

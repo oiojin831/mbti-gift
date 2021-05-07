@@ -4,6 +4,6 @@ export function clickToCopy(href = "https://mfd-mbti.vercel.app") {
   document.body.appendChild(el);
   el.select();
   document.execCommand("copy");
-  alert("Copied the text: " + el.value);
+  alert(el.value + "가 복사 되었습니다! 공유해주세요!");
   document.body.removeChild(el);
 }

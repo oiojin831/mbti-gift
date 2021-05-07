@@ -11,13 +11,26 @@ import {
 
 import HeroImage from "../components/HeroImage";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
 import Link from "next/link";
 import { MainShare } from "../components/Share";
+import Head from "next/head";
 
 export default function Home() {
   return (
     <Container p={0}>
+      <Head>
+        <title>My page title</title>
+        <meta property="og:url" content="https://mfd-mbti.vercel.app" />
+        <meta property="og:title" content="어버이날 MBTI by ㅇㅈ" key="title" />
+        <meta
+          property="og:description"
+          content="어버이날 기념 부모님 mbti 테스트로 자녀들과 더 가까워지세요"
+        />
+        <meta
+          property="og:image"
+          content="https://mfd-mbti.vercel.app/_next/image?url=%2Fmain.jpeg&w=3840&q=75"
+        />
+      </Head>
       <Header />
       <VStack spacing={7} align="stretch">
         <Box>
