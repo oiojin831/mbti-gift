@@ -29,6 +29,7 @@ import {
 import Link from "next/link";
 import { ResultShare, MainShare } from "../../components/Share";
 import Footer from "../../components/Footer";
+import Head from "next/head";
 
 export async function getStaticPaths() {
   const paths = [{ params: { mbti: "INFP-4127-INFP-4127" } }];
@@ -76,6 +77,19 @@ const ResultsMbti = ({
   const pc2 = decToBinArr(secondAnswers)[0];
   return (
     <Container p={0}>
+      <Head>
+        <title>My page title</title>
+        <meta property="og:url" content="https://mfd-mbti.vercel.app" />
+        <meta property="og:title" content="어버이날 MBTI by ㅇㅈ" key="title" />
+        <meta
+          property="og:description"
+          content="우리 생각의 차이를 공유해봐요"
+        />
+        <meta
+          property="og:image"
+          content="https://mfd-mbti.vercel.app/_next/image?url=%2Fmain.jpeg&w=3840&q=75"
+        />
+      </Head>
       <Header />
       <VStack m={4} pb={12} spacing={7} align="stretch">
         <SimpleGrid columns={2} spacingX="40px" spacingY="20px">

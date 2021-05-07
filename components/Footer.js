@@ -20,7 +20,7 @@ const Footer = () => {
     >
       <Center h={14}>
         <Heading size="sm">
-          <Link href="/" passHref>
+          <Link href="mailto:namgajoo@naver.com" passHref>
             <ChakraLink color="white">Created by ㅇ ㅈ</ChakraLink>
           </Link>
         </Heading>
