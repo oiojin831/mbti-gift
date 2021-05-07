@@ -10,7 +10,7 @@ import reducer from "../../reducer/pageReducer";
 
 import { getMbti, binArrToDec } from "../../helpers";
 import { decToBinArr } from "../../helpers/crypto";
-import Footer from "../../components/Footer";
+import Head from "next/head";
 
 export async function getStaticPaths() {
   const paths = [{ params: { mbti: "INFP-4127" } }];
@@ -53,6 +53,23 @@ const SurveyMbti = ({ mbtiType, firstAnswers, qaSheet }) => {
 
   return (
     <Container p={0} h="100vh" overflowY="hidden">
+      <Head>
+        <title>My page title</title>
+        <meta property="og:url" content="https://mfd-mbti.vercel.app" />
+        <meta property="og:title" content="어버이날 MBTI by ㅇㅈ" key="title" />
+        <meta
+          property="og:description"
+          content={
+            isParent
+              ? `아들/딸 이 테스트 한번만 해줘.`
+              : `엄마/아빠 이 테스트 한번만 해주세요`
+          }
+        />
+        <meta
+          property="og:image"
+          content="https://mfd-mbti.vercel.app/_next/image?url=%2Fmain.jpeg&w=3840&q=75"
+        />
+      </Head>
       <Header />
       <Flex py={4}>
         <DirectionButton
