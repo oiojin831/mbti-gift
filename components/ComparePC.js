@@ -8,8 +8,8 @@ const ComparePC = ({ a, b }) => {
       <div>{JSON.stringify(decToBinArr(b))}</div>
       <div>
         {getIndexIfFalse(compareTwo(decToBinArr(a), decToBinArr(b)), data).map(
-          (e) => {
-            return <div>{e.questions[0]}</div>;
+          (e, index) => {
+            return <div key={`abd-${e}-${index}`}>{e.questions[0]}</div>;
           }
         )}
       </div>
@@ -21,7 +21,6 @@ export default ComparePC;
 
 const compareTwo = (firstArr, secondArr) => {
   const diffArr = firstArr.map((ele, index) => ele === secondArr[index]);
-  console.log(diffArr);
   return diffArr;
 };
 

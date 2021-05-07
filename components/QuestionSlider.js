@@ -22,13 +22,14 @@ const QuestionSlider = ({ value }) => {
       max={12}
       isReadOnly={true}
       focusThumbOnChange={false}
+      colorScheme="brand"
     >
-      <SliderTrack bg="green.300">
+      <SliderTrack>
         <Box position="relative" right={10} />
-        <SliderFilledTrack bg="green.500" />
+        <SliderFilledTrack />
       </SliderTrack>
       <SliderThumb boxSize={5}>
-        <Box color="green.700" as={FaAngleRight} />
+        <Box as={FaAngleRight} />
       </SliderThumb>
     </Slider>
   );

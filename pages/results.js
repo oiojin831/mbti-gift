@@ -23,28 +23,27 @@ const ResultsPage = () => {
           <HeroImage />
         </Box>
         <VStack spacing={7} align="center">
-          <Heading>{`${router.query.mbti}인 부모님이 바라는 선물 유형`}</Heading>
-          <Text>아마도 무조건 돈이 최고지?</Text>
-          <Text>A의 결과를 가지고 새로운 링크 만들기</Text>
+          <Heading>{`${router.query.mbti}인 부모님 `}</Heading>
+          <Text>텍스트</Text>
           {link ? (
             <Link
               href={`survey?mbti=${router.query.mbti}&a=${router.query.a}`}
               passHref
             >
-              <Button>자녀/부모에게 보내기</Button>
+              <Button>부모 자식 다르사람하기</Button>
             </Link>
           ) : (
             <ComparePC a={router.query.a} b={router.query.b} />
           )}
         </VStack>
         <Box w="100%" pt="50%" bg="pink.100">
-          참여자수가 1000명 이상일때 참여자수 보여주기.
+          zzz
         </Box>
         <Box w="100%" pt="50%" bg="pink.100">
-          공유 아이콘
+          kkkk
         </Box>
         <Box w="100%" pt="50%" bg="red.300">
-          인기 순위 1위 2위
+          lll
         </Box>
       </VStack>
     </Container>

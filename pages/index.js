@@ -1,12 +1,4 @@
-import {
-  Container,
-  VStack,
-  Box,
-  Button,
-  Heading,
-  Text,
-  Link as ChakraLink,
-} from "@chakra-ui/react";
+import { Container, VStack, Stack, Box, Button, Heading, Text, Link as ChakraLink } from "@chakra-ui/react"; // prettier-ignore
 import HeroImage from "../components/HeroImage";
 import Header from "../components/Header";
 import Link from "next/link";
@@ -20,20 +12,21 @@ export default function Home() {
           <HeroImage />
         </Box>
         <VStack spacing={7} align="center">
-          <Heading>부모님이 바라는 선물 유형</Heading>
-          <Text>아마도 무조건 돈이 최고지?</Text>
+          <Stack spacing={3}>
+            <Heading>어버이날 맞이 MBTI 테스트</Heading>
+            <Text textAlign="center" fontSize="lg" fontWeight="bold">
+              나는 과연 엄마아빠에 대해 얼마나 알고 있을까?
+            </Text>
+            <Text textAlign="center" fontSize="lg" fontWeight="bold">
+              엄마 아빠의 MBTI는?
+            </Text>
+          </Stack>
           <Link href="/survey" passHref>
-            <Button>테스트 시작하기</Button>
+            <Button colorScheme="brand">테스트 시작하기</Button>
           </Link>
         </VStack>
         <Box w="100%" pt="50%" bg="pink.100">
-          참여자수가 1000명 이상일때 참여자수 보여주기.
-        </Box>
-        <Box w="100%" pt="50%" bg="pink.100">
           공유 아이콘
-        </Box>
-        <Box w="100%" pt="50%" bg="red.300">
-          인기 순위 1위 2위
         </Box>
       </VStack>
     </Container>

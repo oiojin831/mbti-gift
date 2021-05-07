@@ -1,15 +1,15 @@
 const mfdQuestionSheet1 = [
   {
     id: 0,
-    questions: ["부모냐 자식이냐?", "자식이냐 부모냐"],
+    questions: ["당신은 누구?", "당신은 누구?"],
     answers: [
       {
-        text: "난 자식이양",
-        type: "C",
+        text: "엄마/아빠",
+        type: "P",
       },
       {
-        text: "난 부모야",
-        type: "P",
+        text: "아들/딸",
+        type: "C",
       },
     ],
   },
