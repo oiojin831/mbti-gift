@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container, VStack, Box, Button, Heading, UnorderedList, ListItem } from "@chakra-ui/react"; // prettier-ignore
+import Image from "next/image";
 
 import HeroImage from "../../components/HeroImage";
 import Header from "../../components/Header";
@@ -18,8 +19,6 @@ export async function getStaticProps({ params }) {
   if (splitted) {
     const mbtiType = splitted[0];
     const firstAnswers = splitted[1];
-    const pc = decToBinArr(firstAnswers)[0];
-    //pc => 0 -> 부모 , 1 -> 자식
 
     return {
       props: {
@@ -27,7 +26,7 @@ export async function getStaticProps({ params }) {
         firstAnswers,
         qaSheet: mfdQSheet1,
         results: mfdResults1[mbtiType],
-        titles: mfdTitles1[pc],
+        titles: mfdTitles1,
       },
       revalidate: 3600,
     };
@@ -39,18 +38,27 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
   if (isFallback) {
     return <div>Loading...</div>;
   }
+  const pc = decToBinArr(firstAnswers)[0];
+  //pc => 0 -> 부모 , 1 -> 자식
   return (
     <Container p={0}>
       <Header />
-      <VStack m={3} spacing={3} align="stretch">
-        <Heading textAlign="center" size="lg">
-          {titles.title}
-        </Heading>
-        <Heading textAlign="center" size="xl">
-          {mbtiType}
-        </Heading>
-        <Box>
-          <HeroImage />
+      <VStack m={3} spacing={4} align="stretch">
+        <Box textAlign="center">
+          <Heading textAlign="center" size="lg">
+            {titles[pc].title}
+          </Heading>
+          <Heading textAlign="center" size="xl">
+            {mbtiType}
+          </Heading>
+          <Image
+            alt={mbtiType}
+            src={`/${mbtiType.toLowerCase()}.png`}
+            objectFit="cover"
+            width="400px"
+            height="400px"
+            quality={100}
+          />
         </Box>
         <Box mx={8}>
           <VStack border="3px solid black" p={8} spacing={6} borderRadius={4}>
