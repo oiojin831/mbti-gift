@@ -23,6 +23,7 @@ const SurveyPage = ({ qaSheet }) => {
   const router = useRouter();
   const [state, dispatch] = useReducer(reducer, initialState);
   const pageData = qaSheet[state.page];
+  console.log("state in survey index", state);
 
   useEffect(() => {
     if (state.done) {

@@ -21,7 +21,7 @@ function reducer(state, action) {
       return {
         ...state,
         page: state.page - 1,
-        answerList: [...state.answerList.slice(0, state.page - 2)],
+        answerList: [...state.answerList.slice(0, state.page - 1)],
       };
 
     default:
