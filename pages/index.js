@@ -1,7 +1,19 @@
-import { Container, VStack, Stack, Box, Button, Heading, Text, Link as ChakraLink } from "@chakra-ui/react"; // prettier-ignore
+import {
+  Container,
+  VStack,
+  Stack,
+  Box,
+  Button,
+  Heading,
+  Text,
+  Link as ChakraLink,
+} from "@chakra-ui/react";
+
 import HeroImage from "../components/HeroImage";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import Link from "next/link";
+import { MainShare } from "../components/Share";
 
 export default function Home() {
   return (
@@ -25,9 +37,7 @@ export default function Home() {
             <Button colorScheme="brand">테스트 시작하기</Button>
           </Link>
         </VStack>
-        <Box w="100%" pt="50%" bg="pink.100">
-          공유 아이콘
-        </Box>
+        <MainShare heading="테스트 공유하기!" />
       </VStack>
     </Container>
   );

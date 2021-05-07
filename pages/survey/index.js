@@ -9,6 +9,7 @@ import { mfdQSheet1 } from "../../data";
 import reducer from "../../reducer/pageReducer";
 
 import { getMbti, binArrToDec } from "../../helpers";
+import Footer from "../../components/Footer";
 
 export async function getStaticProps() {
   return {

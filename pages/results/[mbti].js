@@ -1,10 +1,34 @@
-import { SimpleGrid, Container, Flex, UnorderedList,ListItem,  VStack, Box, Heading, Text, } from "@chakra-ui/react"; //prettier-ignore
+import {
+  Icon,
+  Link as ChakraLink,
+  HStack,
+  SimpleGrid,
+  Container,
+  Flex,
+  UnorderedList,
+  ListItem,
+  VStack,
+  Box,
+  Heading,
+  Text,
+  Button,
+} from "@chakra-ui/react";
 import Header from "../../components/Header";
 import { ComparePC, DiffPC } from "../../components/ComparePC";
 import { mfdQSheet1, mfdResults1, mfdTitles1 } from "../../data";
 import { useRouter } from "next/router";
 import { decToBinArr } from "../../helpers/crypto";
 import Image from "next/image";
+import {
+  RiKakaoTalkFill,
+  RiInstagramLine,
+  RiFacebookBoxFill,
+  RiTwitterFill,
+  RiLinksLine,
+} from "react-icons/ri";
+import Link from "next/link";
+import { ResultShare, MainShare } from "../../components/Share";
+import Footer from "../../components/Footer";
 
 export async function getStaticPaths() {
   const paths = [{ params: { mbti: "INFP-4127-INFP-4127" } }];
@@ -43,16 +67,17 @@ const ResultsMbti = ({
   results,
   titles,
 }) => {
-  const { isFallback } = useRouter();
-  if (isFallback) {
+  const router = useRouter();
+  if (router.isFallback) {
     return <div>Loading...</div>;
   }
+  console.log("url", router.basePath, router.asPath);
   const pc1 = decToBinArr(firstAnswers)[0];
   const pc2 = decToBinArr(secondAnswers)[0];
   return (
     <Container p={0}>
       <Header />
-      <VStack m={4} spacing={7} align="stretch">
+      <VStack m={4} pb={12} spacing={7} align="stretch">
         <SimpleGrid columns={2} spacingX="40px" spacingY="20px">
           <Box textAlign="center">
             <Heading wordBreak="keep-all" textAlign="center" size="sm">
@@ -163,7 +188,6 @@ const ResultsMbti = ({
               </Box>
             </Flex>
           </Box>
-
           <Box textAlign="center">
             <Heading textAlign="center" size="lg">
               {titles[pc2].title}
@@ -237,10 +261,19 @@ const ResultsMbti = ({
               </Box>
             </Flex>
           </Box>
-
           <DiffPC a={firstAnswers} b={secondAnswers} />
         </VStack>
+        <ResultShare
+          pc={decToBinArr(firstAnswers)[0] === 0 ? "엄마/아빠" : "자녀"}
+          url={`https://mfd-mbti.vercel.app/${router.asPath}`}
+          heading="한테도 결과 알려주기!"
+        />
+        <MainShare
+          heading="나만 알 순 없지 테스트 소문내기!"
+          url="https://mfd-mbti.vercel.app"
+        />
       </VStack>
+      <Footer mt={10} />
     </Container>
   );
 };

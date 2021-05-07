@@ -3,11 +3,11 @@ import Image from "next/image";
 const HeroImage = () => {
   return (
     <Image
-      src="/parentsDay.gif"
+      src="/main.jpeg"
       alt="parent's day"
       layout="responsive"
       width={500}
-      height={280}
+      height={400}
     />
   );
 };

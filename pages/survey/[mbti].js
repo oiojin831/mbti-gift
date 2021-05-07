@@ -9,6 +9,8 @@ import { mfdQSheet1 } from "../../data";
 import reducer from "../../reducer/pageReducer";
 
 import { getMbti, binArrToDec } from "../../helpers";
+import { decToBinArr } from "../../helpers/crypto";
+import Footer from "../../components/Footer";
 
 export async function getStaticPaths() {
   const paths = [{ params: { mbti: "INFP-4127" } }];
@@ -36,6 +38,7 @@ const SurveyMbti = ({ mbtiType, firstAnswers, qaSheet }) => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const pageData = qaSheet[state.page];
+  const isParent = decToBinArr(firstAnswers)[0] === 0 ? true : false;
 
   useEffect(() => {
     if (state.done) {
@@ -76,6 +79,7 @@ const SurveyMbti = ({ mbtiType, firstAnswers, qaSheet }) => {
             answer={0}
             qaSheetPageNumber={qaSheet.length}
             text={pageData.answers[0].text}
+            disabled={isParent && state.page === 0}
           />
           <DirectionButton
             dispatch={dispatch}
@@ -83,11 +87,9 @@ const SurveyMbti = ({ mbtiType, firstAnswers, qaSheet }) => {
             answer={1}
             qaSheetPageNumber={qaSheet.length}
             text={pageData.answers[1].text}
+            disabled={!isParent && state.page === 0}
           />
         </VStack>
-      </Box>
-      <Box w="100%" pt="60%" bg="brand.50">
-        화면이 큰경우 보이는 영역임, 뭐 넣어야할까?
       </Box>
     </Container>
   );

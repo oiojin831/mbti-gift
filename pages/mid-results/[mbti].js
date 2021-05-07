@@ -4,9 +4,12 @@ import Image from "next/image";
 
 import HeroImage from "../../components/HeroImage";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import { decToBinArr } from "../../helpers/crypto";
+
 import { mfdQSheet1, mfdResults1, mfdTitles1 } from "../../data";
 import { useRouter } from "next/router";
+import { MainShare, ResultShare } from "../../components/Share";
 
 export async function getStaticPaths() {
   const paths = [{ params: { mbti: "INFP-4127" } }];
@@ -34,10 +37,11 @@ export async function getStaticProps({ params }) {
 }
 
 const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
-  const { isFallback } = useRouter();
-  if (isFallback) {
+  const router = useRouter();
+  if (router.isFallback) {
     return <div>Loading...</div>;
   }
+  console.log(router);
   const pc = decToBinArr(firstAnswers)[0];
   //pc => 0 -> 부모 , 1 -> 자식
   return (
@@ -111,9 +115,15 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
             </Box>
           </Flex>
         </Box>
-        <Link href={`/survey/${mbtiType}-${firstAnswers}`} passHref>
-          <Button>부모 자식 다르사람하기</Button>
-        </Link>
+        <ResultShare
+          pc={decToBinArr(firstAnswers)[0] === 0 ? "자녀" : "엄마/아빠"}
+          url={`https://mfd-mbti.vercel.app/survey/${router.query.mbti}`}
+          heading=" 테스트 시켜서 확인하기!"
+        />
+        <MainShare
+          heading="나만 알 순 없지 테스트 소문내기!"
+          url="https://mfd-mbti.vercel.app"
+        />
       </VStack>
     </Container>
   );
