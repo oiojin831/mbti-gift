@@ -2,7 +2,6 @@ function reducer(state, action) {
   switch (action.type) {
     case "nextPage":
       if (state.isLast) {
-        console.log("done");
         return {
           ...state,
           answerList: [...state.answerList, action.answer],

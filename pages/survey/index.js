@@ -52,9 +52,6 @@ const SurveyPage = ({ qaSheet }) => {
         <QuestionSlider value={state.page} />
       </Box>
       <Box>
-        <Box w="100%" pt="50%" bg="brand.100">
-          이미지
-        </Box>
         <VStack justify="space-around" w="100%" h="45vh">
           <Heading size="md" textAlign="center" wordBreak="keep-all" p={4}>
             {pageData.questions[0]}
@@ -74,9 +71,6 @@ const SurveyPage = ({ qaSheet }) => {
             text={pageData.answers[1].text}
           />
         </VStack>
-      </Box>
-      <Box w="100%" pt="60%" bg="brand.50">
-        화면이 큰경우 보이는 영역임, 뭐 넣어야할까?
       </Box>
     </Container>
   );

@@ -26,8 +26,8 @@ export async function getStaticProps({ params }) {
 const initialState = { page: 0, answerList: [], isLast: false, done: false };
 
 const SurveyMbti = ({ mbtiType, firstAnswers, qaSheet }) => {
-  const { isFallback } = useRouter();
-  if (isFallback) {
+  const router = useRouter();
+  if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
@@ -63,9 +63,6 @@ const SurveyMbti = ({ mbtiType, firstAnswers, qaSheet }) => {
         <QuestionSlider value={state.page} />
       </Box>
       <Box>
-        <Box w="100%" pt="50%" bg="brand.100">
-          이미지
-        </Box>
         <VStack justify="space-around" w="100%" h="45vh">
           <Heading size="md" textAlign="center" wordBreak="keep-all" p={4}>
             {pageData.questions[0]}

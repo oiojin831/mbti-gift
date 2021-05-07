@@ -5,13 +5,9 @@ export const getMbti = (list) => {
   let mbti = "";
 
   // 순서는 변화되서 순서가 일치한다. list -> [0,1,0,1,1,1]
-  const featureList = list.reduce(
-    (result, answerIndex, listIndex) => [
-      ...result,
-      data[listIndex].answers[answerIndex].type,
-    ],
-    []
-  );
+  const featureList = list.reduce((result, answerIndex, listIndex) => {
+    return [...result, data[listIndex].answers[answerIndex].type];
+  }, []);
 
   const countE = featureList.filter((char) => char === "E").length;
   const countI = featureList.filter((char) => char === "I").length;
