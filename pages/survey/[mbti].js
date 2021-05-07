@@ -13,7 +13,7 @@ import { decToBinArr } from "../../helpers/crypto";
 import Head from "next/head";
 
 import { db } from "../../libs/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 export async function getStaticPaths() {
   const paths = [{ params: { mbti: "INFP-4127" } }];
