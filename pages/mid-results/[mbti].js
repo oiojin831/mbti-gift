@@ -25,7 +25,7 @@ export async function getStaticProps({ params }) {
         mbtiType,
         firstAnswers,
         qaSheet: mfdQSheet1,
-        results: mfdResults1[mbtiType],
+        results: mfdResults1,
         titles: mfdTitles1,
       },
       revalidate: 3600,
@@ -72,9 +72,11 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
                 {titles[pc].am}
               </Heading>
               <UnorderedList>
-                {results.am.map((r, index) => {
+                {results[mbtiType].am.map((r, index) => {
                   return (
-                    <ListItem key={`${results.type}-${index}`}>{r}</ListItem>
+                    <ListItem key={`${results[mbtiType].type}-${index}`}>
+                      {r}
+                    </ListItem>
                   );
                 })}
               </UnorderedList>
@@ -84,9 +86,11 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
                 {titles[pc].will}
               </Heading>
               <UnorderedList>
-                {results.will.map((r, index) => {
+                {results[mbtiType].will.map((r, index) => {
                   return (
-                    <ListItem key={`${results.type}-${index}`}>{r}</ListItem>
+                    <ListItem key={`${results[mbtiType].type}-${index}`}>
+                      {r}
+                    </ListItem>
                   );
                 })}
               </UnorderedList>
@@ -96,9 +100,11 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
                 {titles[pc].hard}
               </Heading>
               <UnorderedList>
-                {results.will.map((r, index) => {
+                {results[mbtiType].will.map((r, index) => {
                   return (
-                    <ListItem key={`${results.type}-${index}`}>{r}</ListItem>
+                    <ListItem key={`${results[mbtiType].type}-${index}`}>
+                      {r}
+                    </ListItem>
                   );
                 })}
               </UnorderedList>
