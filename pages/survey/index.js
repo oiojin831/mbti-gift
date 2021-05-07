@@ -10,6 +10,8 @@ import reducer from "../../reducer/pageReducer";
 
 import { getMbti, binArrToDec } from "../../helpers";
 import Head from "next/head";
+import { db } from "../../libs/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 export async function getStaticProps() {
   return {
@@ -25,8 +27,16 @@ const SurveyPage = ({ qaSheet }) => {
   const pageData = qaSheet[state.page];
   console.log("state in survey index", state);
 
+  const saveData = async () => {
+    const docRef = await addDoc(collection(db, "firstSurvey"), {
+      mbti: getMbti(state.answerList),
+      answers: state.answerList,
+    });
+  };
+
   useEffect(() => {
     if (state.done) {
+      saveData();
       const mbti = `${getMbti(state.answerList)}-${binArrToDec(
         state.answerList
       )}`;

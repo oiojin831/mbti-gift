@@ -12,6 +12,9 @@ import { getMbti, binArrToDec } from "../../helpers";
 import { decToBinArr } from "../../helpers/crypto";
 import Head from "next/head";
 
+import { db } from "../../libs/firebase";
+import { collection, addDoc } from "firebase/firestore";
+
 export async function getStaticPaths() {
   const paths = [{ params: { mbti: "INFP-4127" } }];
 
@@ -40,8 +43,18 @@ const SurveyMbti = ({ mbtiType, firstAnswers, qaSheet }) => {
   const pageData = qaSheet[state.page];
   const isParent = decToBinArr(firstAnswers)[0] === 0 ? true : false;
 
+  const saveData = async () => {
+    const docRef = await addDoc(collection(db, "secondSurvey"), {
+      mbti1: mbtiType,
+      ansers1: firstAnswers,
+      mbti2: getMbti(state.answerList),
+      answers2: state.answerList,
+    });
+  };
+
   useEffect(() => {
     if (state.done) {
+      saveData();
       const mbti = `${getMbti(state.answerList)}-${binArrToDec(
         state.answerList
       )}`;

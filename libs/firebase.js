@@ -1,5 +1,6 @@
 import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, getDocs } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics";
 
 const clientCredentials = {
   apiKey: "AIzaSyBSMZCgZ8ZFUzqZY2SYRuyVUYPAKD-gPLc",
