@@ -11,7 +11,7 @@ import reducer from "../../reducer/pageReducer";
 import { getMbti, binArrToDec } from "../../helpers";
 import Head from "next/head";
 import { db } from "../../libs/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 export async function getStaticProps() {
   return {
@@ -31,6 +31,7 @@ const SurveyPage = ({ qaSheet }) => {
     const docRef = await addDoc(collection(db, "firstSurvey"), {
       mbti: getMbti(state.answerList),
       answers: state.answerList,
+      createdAt: Timestamp.fromDate(new Date()),
     });
   };
 

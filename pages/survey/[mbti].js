@@ -49,6 +49,7 @@ const SurveyMbti = ({ mbtiType, firstAnswers, qaSheet }) => {
       ansers1: firstAnswers,
       mbti2: getMbti(state.answerList),
       answers2: state.answerList,
+      createdAt: Timestamp.fromDate(new Date()),
     });
   };
 
