@@ -2,7 +2,7 @@ import { Container, VStack, Box, Heading, Text, } from "@chakra-ui/react"; //pre
 import HeroImage from "../../components/HeroImage";
 import Header from "../../components/Header";
 import ComparePC from "../../components/ComparePC";
-import data from "../../data";
+import { mfdQSheet1, mfdResults1 } from "../../data";
 import { useRouter } from "next/router";
 
 export async function getStaticPaths() {
@@ -23,7 +23,8 @@ export async function getStaticProps({ params }) {
       firstAnswers,
       secondMbtiType,
       secondAnswers,
-      qaSheet: data,
+      qaSheet: mfdQSheet1,
+      results: mfdResults1,
     },
     revalidate: 3600,
   };
@@ -35,6 +36,7 @@ const ResultsMbti = ({
   secondMbtiType,
   secondAnswers,
   qaSheet,
+  results,
 }) => {
   const { isFallback } = useRouter();
   if (isFallback) {

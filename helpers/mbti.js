@@ -1,4 +1,4 @@
-import data from "../data";
+import { mfdQSheet1 } from "../data";
 
 // list -> answerIndexList
 export const getMbti = (list) => {
@@ -6,7 +6,7 @@ export const getMbti = (list) => {
 
   // 순서는 변화되서 순서가 일치한다. list -> [0,1,0,1,1,1]
   const featureList = list.reduce((result, answerIndex, listIndex) => {
-    return [...result, data[listIndex].answers[answerIndex].type];
+    return [...result, mfdQSheet1[listIndex].answers[answerIndex].type];
   }, []);
 
   const countE = featureList.filter((char) => char === "E").length;

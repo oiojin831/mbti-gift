@@ -5,14 +5,14 @@ import QuestionSlider from "../../components/QuestionSlider";
 import DirectionButton from "../../components/DirectionButton";
 import Header from "../../components/Header";
 
-import data from "../../data";
+import { mfdQSheet1 } from "../../data";
 import reducer from "../../reducer/pageReducer";
 
 import { getMbti, binArrToDec } from "../../helpers";
 
 export async function getStaticProps() {
   return {
-    props: { qaSheet: data },
+    props: { qaSheet: mfdQSheet1 },
   };
 }
 

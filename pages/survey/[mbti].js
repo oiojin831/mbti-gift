@@ -5,7 +5,7 @@ import QuestionSlider from "../../components/QuestionSlider";
 import DirectionButton from "../../components/DirectionButton";
 import Header from "../../components/Header";
 
-import data from "../../data";
+import { mfdQSheet1 } from "../../data";
 import reducer from "../../reducer/pageReducer";
 
 import { getMbti, binArrToDec } from "../../helpers";
@@ -20,7 +20,10 @@ export async function getStaticProps({ params }) {
   const mbtiType = params.mbti.split("-")[0];
   const firstAnswers = params.mbti.split("-")[1];
 
-  return { props: { mbtiType, firstAnswers, qaSheet: data }, revalidate: 3600 };
+  return {
+    props: { mbtiType, firstAnswers, qaSheet: mfdQSheet1 },
+    revalidate: 3600,
+  };
 }
 
 const initialState = { page: 0, answerList: [], isLast: false, done: false };

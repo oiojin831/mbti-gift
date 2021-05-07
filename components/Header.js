@@ -13,7 +13,7 @@ const Header = () => {
       <Center h={14}>
         <Heading size="lg">
           <Link href="/" passHref>
-            <ChakraLink>어버이날 MBTI</ChakraLink>
+            <ChakraLink color="white">어버이날 MBTI</ChakraLink>
           </Link>
         </Heading>
       </Center>
