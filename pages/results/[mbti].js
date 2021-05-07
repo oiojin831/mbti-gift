@@ -47,7 +47,7 @@ const ResultsMbti = ({
     return <div>Loading...</div>;
   }
   const pc1 = decToBinArr(firstAnswers)[0];
-  const pc2 = decToBinArr(firstAnswers)[1];
+  const pc2 = decToBinArr(secondAnswers)[1];
   return (
     <Container p={0}>
       <Header />

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Container, VStack, Box, Button, Heading, UnorderedList, ListItem } from "@chakra-ui/react"; // prettier-ignore
+import { Container, VStack, Box, Button, Flex, Heading, UnorderedList, ListItem } from "@chakra-ui/react"; // prettier-ignore
 import Image from "next/image";
 
 import HeroImage from "../../components/HeroImage";
@@ -61,10 +61,15 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
           />
         </Box>
         <Box mx={8}>
-          <VStack border="3px solid black" p={8} spacing={6} borderRadius={4}>
-            <Box>
-              <Heading p={3} textAlign="center" size="md">
-                {titles.am}
+          <Flex
+            flexDir="column"
+            border="3px solid black"
+            p={8}
+            borderRadius={4}
+          >
+            <Box my={6}>
+              <Heading mb={3} size="md">
+                {titles[pc].am}
               </Heading>
               <UnorderedList>
                 {results.am.map((r, index) => {
@@ -74,9 +79,9 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
                 })}
               </UnorderedList>
             </Box>
-            <Box>
-              <Heading p={3} size="md">
-                엄마/아빠는 이런 내가 이런 사람이 되길 바라지 않을까?
+            <Box my={6}>
+              <Heading mb={3} size="md">
+                {titles[pc].will}
               </Heading>
               <UnorderedList>
                 {results.will.map((r, index) => {
@@ -86,9 +91,9 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
                 })}
               </UnorderedList>
             </Box>
-            <Box>
-              <Heading p={3} size="md">
-                우리 엄마/아빠는 이러면 버거워할껄?
+            <Box my={6}>
+              <Heading mb={3} size="md">
+                {titles[pc].hard}
               </Heading>
               <UnorderedList>
                 {results.will.map((r, index) => {
@@ -98,7 +103,7 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
                 })}
               </UnorderedList>
             </Box>
-          </VStack>
+          </Flex>
         </Box>
         <Link href={`/survey/${mbtiType}-${firstAnswers}`} passHref>
           <Button>부모 자식 다르사람하기</Button>

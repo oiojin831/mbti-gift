@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@chakra-ui/react";
+import { Text, Button } from "@chakra-ui/react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
 const DirectionButton = ({
@@ -29,11 +29,14 @@ const DirectionButton = ({
 
   return (
     <Button
+      fontSize={15}
       onClick={() => dispatch({ type, answer, qaSheetPageNumber })}
       colorScheme="brand"
       {...props}
     >
-      {text}
+      <Text display="inline-block" wordBreak="keep-all">
+        {text}
+      </Text>
     </Button>
   );
 };
