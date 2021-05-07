@@ -3,6 +3,7 @@ import HeroImage from "../../components/HeroImage";
 import Header from "../../components/Header";
 import ComparePC from "../../components/ComparePC";
 import data from "../../data";
+import { useRouter } from "next/router";
 
 export async function getStaticPaths() {
   const paths = [{ params: { mbti: "INFP-4127-INFP-4127" } }];
@@ -35,6 +36,10 @@ const ResultsMbti = ({
   secondAnswers,
   qaSheet,
 }) => {
+  const { isFallback } = useRouter();
+  if (isFallback) {
+    return <div>Loading...</div>;
+  }
   return (
     <Container p={0}>
       <Header />

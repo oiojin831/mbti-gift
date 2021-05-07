@@ -13,7 +13,7 @@ import { getMbti, binArrToDec } from "../../helpers";
 export async function getStaticPaths() {
   const paths = [{ params: { mbti: "INFP-4127" } }];
 
-  return { paths, fallback: true };
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
@@ -26,7 +26,11 @@ export async function getStaticProps({ params }) {
 const initialState = { page: 0, answerList: [], isLast: false, done: false };
 
 const SurveyMbti = ({ mbtiType, firstAnswers, qaSheet }) => {
-  const router = useRouter();
+  const { isFallback } = useRouter();
+  if (isFallback) {
+    return <div>Loading...</div>;
+  }
+
   const [state, dispatch] = useReducer(reducer, initialState);
   const pageData = qaSheet[state.page];
 
