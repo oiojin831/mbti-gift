@@ -13,7 +13,7 @@ import { getMbti, binArrToDec } from "../../helpers";
 export async function getStaticPaths() {
   const paths = [{ params: { mbti: "INFP-4127" } }];
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params }) {
