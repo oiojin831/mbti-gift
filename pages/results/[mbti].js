@@ -1,5 +1,4 @@
 import { SimpleGrid, Container, Flex, UnorderedList,ListItem,  VStack, Box, Heading, Text, } from "@chakra-ui/react"; //prettier-ignore
-import HeroImage from "../../components/HeroImage";
 import Header from "../../components/Header";
 import { ComparePC, DiffPC } from "../../components/ComparePC";
 import { mfdQSheet1, mfdResults1, mfdTitles1 } from "../../data";
@@ -18,6 +17,8 @@ export async function getStaticProps({ params }) {
   const firstAnswers = params.mbti.split("-")[1];
   const secondMbtiType = params.mbti.split("-")[2];
   const secondAnswers = params.mbti.split("-")[3];
+
+  console.log(firstMbtiType, firstAnswers, secondMbtiType, secondAnswers);
 
   return {
     props: {

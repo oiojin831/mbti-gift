@@ -20,8 +20,7 @@ const DiffPC = ({ a, b }) => {
   const diffQ = getIndexIfFalse(
     compareTwo(decToBinArr(a), decToBinArr(b)),
     mfdQSheet1
-  );
-  console.log("diffQ", diffQ);
+  ).slice(1);
   if (diffQ.length === 0) {
     return (
       <>
@@ -42,21 +41,15 @@ const DiffPC = ({ a, b }) => {
   }
   return (
     <Flex flexDir="column">
+      <Center>
+        <Heading mt={6} size="lg">
+          다른 답변 모음!
+        </Heading>
+      </Center>
       {diffQ.map((e, index) => {
         return (
-          <>
-            <Center>
-              <Heading mt={6} size="lg">
-                다른 답변 모음!
-              </Heading>
-            </Center>
-            <Box
-              border="3px solid black"
-              borderRadius={6}
-              p={4}
-              key={`abd-${e}-${index}`}
-              my={6}
-            >
+          <Box key={`${pcA[0]}-abxxd-${e.id}-${index}`}>
+            <Box border="3px solid black" borderRadius={6} p={4} my={6}>
               <Heading mb={3} size="md">
                 {e.questions[0]}
               </Heading>
@@ -73,7 +66,7 @@ const DiffPC = ({ a, b }) => {
                 </ListItem>
               </UnorderedList>
             </Box>
-          </>
+          </Box>
         );
       })}
     </Flex>
@@ -84,8 +77,9 @@ const ComparePC = ({ a, b }) => {
   const diffArrLast = getIndexIfFalse(
     compareTwo(decToBinArr(a), decToBinArr(b)),
     mfdQSheet1
-  );
-  console.log("diff", diffArrLast);
+  ).slice(1);
+  console.log("diff slice", diffArrLast);
+
   return (
     <>
       <VStack spacing={0}>
@@ -109,7 +103,7 @@ export { ComparePC, DiffPC };
 
 const compareTwo = (firstArr, secondArr) => {
   const diffArr = firstArr.map((ele, index) => ele === secondArr[index]);
-  console.log("diffArr", diffArr);
+  console.log("diffarr in compretwo", diffArr);
   return diffArr;
 };
 
@@ -118,6 +112,6 @@ const getIndexIfFalse = (arr, data) => {
     if (ele === false) {
       result.push(data[index]);
     }
-    return result.slice(1);
+    return result;
   }, []);
 };
