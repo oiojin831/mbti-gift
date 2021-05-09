@@ -104,7 +104,7 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
                 {titles[pc].hard}
               </Heading>
               <UnorderedList>
-                {results[mbtiType].will.map((r, index) => {
+                {results[mbtiType].hard.map((r, index) => {
                   return (
                     <ListItem key={`${results[mbtiType].type}-${index}`}>
                       {r}
