@@ -102,7 +102,7 @@ const SurveyMbti = ({ mbtiType, firstAnswers, qaSheet }) => {
       <Box>
         <VStack justify="space-around" w="100%" h="45vh">
           <Heading size="md" textAlign="center" wordBreak="keep-all" p={4}>
-            {pageData.questions[0]}
+            {pageData.questions[state.answerList[0] || 0]}
           </Heading>
           <DirectionButton
             dispatch={dispatch}

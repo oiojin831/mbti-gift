@@ -191,7 +191,7 @@ const ResultsMbti = ({
                   {titles[pc1].hard}
                 </Heading>
                 <UnorderedList>
-                  {results[firstMbtiType].will.map((r, index) => {
+                  {results[firstMbtiType].hard.map((r, index) => {
                     return (
                       <ListItem key={`${results[firstMbtiType].type}-${index}`}>
                         {r}
@@ -262,7 +262,7 @@ const ResultsMbti = ({
                   {titles[pc2].hard}
                 </Heading>
                 <UnorderedList>
-                  {results[secondMbtiType].will.map((r, index) => {
+                  {results[secondMbtiType].hard.map((r, index) => {
                     return (
                       <ListItem
                         key={`second-${results[secondMbtiType].type}-${index}`}
