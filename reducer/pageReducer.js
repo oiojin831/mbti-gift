@@ -1,11 +1,20 @@
+import { getMbti, binArrToDec } from "../helpers";
+
 function reducer(state, action) {
   switch (action.type) {
+    case "finish":
+      const newAnswerList = [...state.answerList, action.answer];
+
+      return {
+        ...state,
+        answerList: newAnswerList,
+        mbti: `${getMbti(newAnswerList)}-${binArrToDec(newAnswerList)}`,
+      };
     case "nextPage":
       if (state.isLast) {
         return {
           ...state,
           answerList: [...state.answerList, action.answer],
-          done: true,
         };
       }
       return {
@@ -16,7 +25,7 @@ function reducer(state, action) {
       };
     case "previousPage":
       if (state.page <= 1) {
-        return state;
+        return { ...state };
       }
       return {
         ...state,

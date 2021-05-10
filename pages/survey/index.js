@@ -1,67 +1,52 @@
 import { useReducer, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Heading, Center, Spacer, Container, Box, Flex, VStack } from "@chakra-ui/react"; // prettier-ignore
-import QuestionSlider from "../../components/QuestionSlider";
-import DirectionButton from "../../components/DirectionButton";
-import Header from "../../components/Header";
 
-import { mfdQSheet1 } from "../../data";
+import { QuestionSlider, DirectionButton, Header, MetaData } from "../../components"; // prettier-ignore
+import { mcqs } from "../../data";
 import reducer from "../../reducer/pageReducer";
 
-import { getMbti, binArrToDec } from "../../helpers";
-import Head from "next/head";
 import { db } from "../../libs/firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 export async function getStaticProps() {
   return {
-    props: { qaSheet: mfdQSheet1 },
+    props: { mcqs },
   };
 }
 
-const initialState = { page: 0, answerList: [], isLast: false, done: false };
+const initialState = {
+  page: 0,
+  answerList: [],
+  isLast: false,
+  mbti: "",
+};
 
-const SurveyPage = ({ qaSheet }) => {
+const SurveyPage = ({ mcqs }) => {
   const router = useRouter();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const pageData = qaSheet[state.page];
-  console.log("state in survey index", state);
+  const pageData = mcqs[state.page];
 
   const saveData = async () => {
-    const docRef = await addDoc(collection(db, "firstSurvey"), {
-      mbti: getMbti(state.answerList),
+    const docRef = await addDoc(collection(db, "testSurvey"), {
+      mbti: state.mbti.split("-")[0],
       answers: state.answerList,
       createdAt: Timestamp.fromDate(new Date()),
     });
   };
 
   useEffect(() => {
-    if (state.done) {
+    if (state.mbti !== "") {
       saveData();
-      const mbti = `${getMbti(state.answerList)}-${binArrToDec(
-        state.answerList
-      )}`;
       router.push({
-        pathname: `/mid-results/${mbti}`,
+        pathname: `/mid-results/${state.mbti}`,
       });
     }
-  }, [state.done, state.answerList]);
+  }, [state.mbti]);
 
   return (
     <Container p={0} h="100vh" overflowY="hidden">
-      <Head>
-        <title>My page title</title>
-        <meta property="og:url" content="https://mfd-mbti.vercel.app" />
-        <meta property="og:title" content="어버이날 MBTI by ㅇㅈ" key="title" />
-        <meta
-          property="og:description"
-          content="어버이날 기념 부모님 mbti 테스트로 자녀들과 더 가까워지세요"
-        />
-        <meta
-          property="og:image"
-          content="https://mfd-mbti.vercel.app/_next/image?url=%2Fmain.jpeg&w=3840&q=75"
-        />
-      </Head>
+      <MetaData />
       <Header />
       <Flex py={4}>
         <DirectionButton
@@ -82,20 +67,41 @@ const SurveyPage = ({ qaSheet }) => {
           <Heading size="md" textAlign="center" wordBreak="keep-all" p={4}>
             {pageData.questions[state.answerList[0] || 0]}
           </Heading>
-          <DirectionButton
-            dispatch={dispatch}
-            type="nextPage"
-            answer={0}
-            qaSheetPageNumber={qaSheet.length}
-            text={pageData.answers[0].text}
-          />
-          <DirectionButton
-            dispatch={dispatch}
-            type="nextPage"
-            answer={1}
-            qaSheetPageNumber={qaSheet.length}
-            text={pageData.answers[1].text}
-          />
+          {state.page + 1 === mcqs.length ? (
+            <>
+              <DirectionButton
+                dispatch={dispatch}
+                type="finish"
+                answer={0}
+                qaSheetPageNumber={mcqs.length}
+                text={pageData.answers[0].text}
+              />
+              <DirectionButton
+                dispatch={dispatch}
+                type="finish"
+                answer={1}
+                qaSheetPageNumber={mcqs.length}
+                text={pageData.answers[1].text}
+              />
+            </>
+          ) : (
+            <>
+              <DirectionButton
+                dispatch={dispatch}
+                type="nextPage"
+                answer={0}
+                qaSheetPageNumber={mcqs.length}
+                text={pageData.answers[0].text}
+              />
+              <DirectionButton
+                dispatch={dispatch}
+                type="nextPage"
+                answer={1}
+                qaSheetPageNumber={mcqs.length}
+                text={pageData.answers[1].text}
+              />
+            </>
+          )}
         </VStack>
       </Box>
     </Container>

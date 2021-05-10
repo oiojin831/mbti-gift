@@ -1,15 +1,11 @@
-import Link from "next/link";
 import { Container, VStack, Box, Button, Flex, Heading, UnorderedList, ListItem } from "@chakra-ui/react"; // prettier-ignore
+import { useRouter } from "next/router";
 import Image from "next/image";
 
-import HeroImage from "../../components/HeroImage";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import { decToBinArr } from "../../helpers/crypto";
+import { Header, MainShare, ResultShare } from "../../components";
 
-import { mfdQSheet1, mfdResults1, mfdTitles1 } from "../../data";
-import { useRouter } from "next/router";
-import { MainShare, ResultShare } from "../../components/Share";
+import { decToBinArr } from "../../helpers/crypto";
+import { results, titles } from "../../data";
 
 export async function getStaticPaths() {
   const paths = [{ params: { mbti: "INFP-4127" } }];
@@ -21,36 +17,34 @@ export async function getStaticProps({ params }) {
   const splitted = params.mbti.split("-");
   if (splitted) {
     const mbtiType = splitted[0];
-    const firstAnswers = splitted[1];
+    const answerList = splitted[1];
+    const parentChildBinary = decToBinArr(answerList)[0];
 
     return {
       props: {
         mbtiType,
-        firstAnswers,
-        qaSheet: mfdQSheet1,
-        results: mfdResults1,
-        titles: mfdTitles1,
+        parentChildBinary,
+        results,
+        titles,
       },
       revalidate: 3600,
     };
   }
 }
 
-const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
+const MidResult = ({ mbtiType, parentChildBinary, results, titles }) => {
   const router = useRouter();
   if (router.isFallback) {
-    return <div>Loading...</div>;
+    return <div>Generating Loading...</div>;
   }
-  console.log(router);
-  const pc = decToBinArr(firstAnswers)[0];
-  //pc => 0 -> 부모 , 1 -> 자식
+
   return (
     <Container p={0}>
       <Header />
       <VStack m={3} spacing={4} align="stretch">
         <Box textAlign="center">
           <Heading textAlign="center" size="lg">
-            {titles[pc].title}
+            {titles[parentChildBinary].title}
           </Heading>
           <Heading textAlign="center" size="xl">
             {mbtiType}
@@ -73,7 +67,7 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
           >
             <Box my={6}>
               <Heading mb={3} size="md">
-                {titles[pc].am}
+                {titles[parentChildBinary].am}
               </Heading>
               <UnorderedList>
                 {results[mbtiType].am.map((r, index) => {
@@ -87,7 +81,7 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
             </Box>
             <Box my={6}>
               <Heading mb={3} size="md">
-                {titles[pc].will}
+                {titles[parentChildBinary].will}
               </Heading>
               <UnorderedList>
                 {results[mbtiType].will.map((r, index) => {
@@ -101,7 +95,7 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
             </Box>
             <Box my={6}>
               <Heading mb={3} size="md">
-                {titles[pc].hard}
+                {titles[parentChildBinary].hard}
               </Heading>
               <UnorderedList>
                 {results[mbtiType].hard.map((r, index) => {
@@ -116,7 +110,7 @@ const MidResult = ({ mbtiType, firstAnswers, qaSheet, results, titles }) => {
           </Flex>
         </Box>
         <ResultShare
-          pc={decToBinArr(firstAnswers)[0] === 0 ? "자녀" : "엄마/아빠"}
+          parentChild={parentChildBinary === 0 ? "자녀" : "엄마/아빠"}
           url={`https://mfd-mbti.vercel.app/survey/${router.query.mbti}`}
           heading=" 테스트 시켜서 확인하기!"
         />

@@ -1,18 +1,5 @@
-import {
-  Box,
-  Heading,
-  HStack,
-  Link as ChakraLink,
-  Icon,
-  Button,
-} from "@chakra-ui/react";
-import {
-  RiKakaoTalkFill,
-  RiInstagramLine,
-  RiFacebookBoxFill,
-  RiTwitterFill,
-  RiLinksLine,
-} from "react-icons/ri";
+import { Box, Heading, HStack, Link as ChakraLink, Icon, Button, } from "@chakra-ui/react"; // prettier-ignore
+import { RiLinksLine } from "react-icons/ri";
 import { clickToCopy } from "../helpers/copy";
 import Link from "next/link";
 
@@ -35,8 +22,7 @@ const MainShare = ({ heading, url }) => {
   );
 };
 
-const ResultShare = ({ pc, url, heading }) => {
-  console.log("inurl", url);
+const ResultShare = ({ parentChild, url, heading }) => {
   return (
     <>
       <Link href="/">
@@ -44,7 +30,7 @@ const ResultShare = ({ pc, url, heading }) => {
       </Link>
       <Box pt={10}>
         <Heading fontSize="lg" textAlign="center" mb={4}>
-          {`${pc}${heading}`}
+          {`${parentChild}${heading}`}
         </Heading>
         <HStack justifyContent="space-around">
           <Icon

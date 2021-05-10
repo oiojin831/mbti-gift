@@ -1,16 +1,13 @@
 import { useReducer, useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { Heading, Center, Spacer, Container, Box, Flex, VStack } from "@chakra-ui/react"; // prettier-ignore
-import QuestionSlider from "../../components/QuestionSlider";
-import DirectionButton from "../../components/DirectionButton";
-import Header from "../../components/Header";
 
-import { mfdQSheet1 } from "../../data";
+import { QuestionSlider, DirectionButton, Header } from "../../components"; // prettier-ignore
+import { mcqs } from "../../data";
 import reducer from "../../reducer/pageReducer";
 
-import { getMbti, binArrToDec } from "../../helpers";
 import { decToBinArr } from "../../helpers/crypto";
-import Head from "next/head";
 
 import { db } from "../../libs/firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
@@ -22,48 +19,50 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const mbtiType = params.mbti.split("-")[0];
-  const firstAnswers = params.mbti.split("-")[1];
+  const prevAnswerList = params.mbti.split("-")[1];
+  const isParent = decToBinArr(prevAnswerList)[0] === 0 ? true : false;
 
   return {
-    props: { mbtiType, firstAnswers, qaSheet: mfdQSheet1 },
+    props: { mcqs, prevMbti: params.mbti, prevAnswerList, isParent },
     revalidate: 3600,
   };
 }
 
-const initialState = { page: 0, answerList: [], isLast: false, done: false };
+const initialState = {
+  page: 0,
+  answerList: [],
+  isLast: false,
+  mbti: "",
+};
 
-const SurveyMbti = ({ mbtiType, firstAnswers, qaSheet }) => {
+const SurveyMbti = ({ mcqs, prevMbti, prevAnswerList, isParent }) => {
   const router = useRouter();
+
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  const pageData = qaSheet[state.page];
-  const isParent = decToBinArr(firstAnswers)[0] === 0 ? true : false;
+  const pageData = mcqs[state.page];
 
   const saveData = async () => {
     const docRef = await addDoc(collection(db, "secondSurvey"), {
-      mbti1: mbtiType,
-      ansers1: firstAnswers,
-      mbti2: getMbti(state.answerList),
+      mbti1: prevMbti.split("-")[0],
+      ansers1: prevAnswerList,
+      mbti2: state.mbti.split("-")[0],
       answers2: state.answerList,
       createdAt: Timestamp.fromDate(new Date()),
     });
   };
 
   useEffect(() => {
-    if (state.done) {
+    if (state.mbti !== "") {
       saveData();
-      const mbti = `${getMbti(state.answerList)}-${binArrToDec(
-        state.answerList
-      )}`;
       router.push({
-        pathname: `/results/${mbtiType}-${firstAnswers}-${mbti}`,
+        pathname: `/results/${prevMbti}-${state.mbti}`,
       });
     }
-  }, [state.done, state.answerList]);
+  }, [state.mbti]);
 
   return (
     <Container p={0} h="100vh" overflowY="hidden">
@@ -104,22 +103,45 @@ const SurveyMbti = ({ mbtiType, firstAnswers, qaSheet }) => {
           <Heading size="md" textAlign="center" wordBreak="keep-all" p={4}>
             {pageData.questions[state.answerList[0] || 0]}
           </Heading>
-          <DirectionButton
-            dispatch={dispatch}
-            type="nextPage"
-            answer={0}
-            qaSheetPageNumber={qaSheet.length}
-            text={pageData.answers[0].text}
-            disabled={isParent && state.page === 0}
-          />
-          <DirectionButton
-            dispatch={dispatch}
-            type="nextPage"
-            answer={1}
-            qaSheetPageNumber={qaSheet.length}
-            text={pageData.answers[1].text}
-            disabled={!isParent && state.page === 0}
-          />
+          {state.page + 1 === mcqs.length ? (
+            <>
+              <DirectionButton
+                dispatch={dispatch}
+                type="finish"
+                answer={0}
+                qaSheetPageNumber={mcqs.length}
+                text={pageData.answers[0].text}
+                disabled={isParent && state.page === 0}
+              />
+              <DirectionButton
+                dispatch={dispatch}
+                type="finish"
+                answer={1}
+                qaSheetPageNumber={mcqs.length}
+                text={pageData.answers[1].text}
+                disabled={!isParent && state.page === 0}
+              />
+            </>
+          ) : (
+            <>
+              <DirectionButton
+                dispatch={dispatch}
+                type="nextPage"
+                answer={0}
+                qaSheetPageNumber={mcqs.length}
+                text={pageData.answers[0].text}
+                disabled={isParent && state.page === 0}
+              />
+              <DirectionButton
+                dispatch={dispatch}
+                type="nextPage"
+                answer={1}
+                qaSheetPageNumber={mcqs.length}
+                text={pageData.answers[1].text}
+                disabled={!isParent && state.page === 0}
+              />
+            </>
+          )}
         </VStack>
       </Box>
     </Container>

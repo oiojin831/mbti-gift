@@ -1,35 +1,11 @@
-import {
-  Icon,
-  Link as ChakraLink,
-  HStack,
-  SimpleGrid,
-  Container,
-  Flex,
-  UnorderedList,
-  ListItem,
-  VStack,
-  Box,
-  Heading,
-  Text,
-  Button,
-} from "@chakra-ui/react";
-import Header from "../../components/Header";
-import { ComparePC, DiffPC } from "../../components/ComparePC";
-import { mfdQSheet1, mfdResults1, mfdTitles1 } from "../../data";
-import { useRouter } from "next/router";
-import { decToBinArr } from "../../helpers/crypto";
 import Image from "next/image";
-import {
-  RiKakaoTalkFill,
-  RiInstagramLine,
-  RiFacebookBoxFill,
-  RiTwitterFill,
-  RiLinksLine,
-} from "react-icons/ri";
-import Link from "next/link";
-import { ResultShare, MainShare } from "../../components/Share";
-import Footer from "../../components/Footer";
 import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Link as ChakraLink, SimpleGrid, Container, Flex, UnorderedList, ListItem, VStack, Box, Heading } from "@chakra-ui/react"; // prettier-ignore
+import { Footer, ResultShare, MainShare, ComparePC, DiffPC, Header } from "../../components"; // prettier-ignore
+import { mcqs, results, titles } from "../../data";
+import { decToBinArr } from "../../helpers/crypto";
 
 export async function getStaticPaths() {
   const paths = [{ params: { mbti: "INFP-4127-INFP-4127" } }];
@@ -42,8 +18,8 @@ export async function getStaticProps({ params }) {
   const firstAnswers = params.mbti.split("-")[1];
   const secondMbtiType = params.mbti.split("-")[2];
   const secondAnswers = params.mbti.split("-")[3];
-
-  console.log(firstMbtiType, firstAnswers, secondMbtiType, secondAnswers);
+  const firstParentChildBinary = decToBinArr(firstAnswers)[0];
+  const secondParentChildBinary = decToBinArr(secondAnswers)[0];
 
   return {
     props: {
@@ -51,9 +27,10 @@ export async function getStaticProps({ params }) {
       firstAnswers,
       secondMbtiType,
       secondAnswers,
-      qaSheet: mfdQSheet1,
-      results: mfdResults1,
-      titles: mfdTitles1,
+      firstParentChildBinary,
+      secondParentChildBinary,
+      results,
+      titles,
     },
     revalidate: 3600,
   };
@@ -64,7 +41,8 @@ const ResultsMbti = ({
   firstAnswers,
   secondMbtiType,
   secondAnswers,
-  qaSheet,
+  firstParentChildBinary,
+  secondParentChildBinary,
   results,
   titles,
 }) => {
@@ -72,9 +50,7 @@ const ResultsMbti = ({
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
-  console.log("url", router.basePath, router.asPath);
-  const pc1 = decToBinArr(firstAnswers)[0];
-  const pc2 = decToBinArr(secondAnswers)[0];
+
   return (
     <Container p={0}>
       <Head>
@@ -95,7 +71,7 @@ const ResultsMbti = ({
         <SimpleGrid columns={2} spacingX="40px" spacingY="20px">
           <Box textAlign="center">
             <Heading wordBreak="keep-all" textAlign="center" size="sm">
-              {titles[pc1].title}
+              {titles[firstParentChildBinary].title}
             </Heading>
             <Heading my={2} textAlign="center" size="xl">
               {firstMbtiType}
@@ -111,7 +87,7 @@ const ResultsMbti = ({
           </Box>
           <Box textAlign="center">
             <Heading wordBreak="keep-all" textAlign="center" size="sm">
-              {titles[pc2].title}
+              {titles[secondParentChildBinary].title}
             </Heading>
             <Heading my={2} textAlign="center" size="xl">
               {secondMbtiType}
@@ -137,7 +113,7 @@ const ResultsMbti = ({
         <VStack m={3} spacing={4} align="stretch">
           <Box textAlign="center">
             <Heading textAlign="center" size="lg">
-              {titles[pc1].title}
+              {titles[firstParentChildBinary].title}
             </Heading>
             <Heading textAlign="center" size="xl">
               {firstMbtiType}
@@ -160,7 +136,7 @@ const ResultsMbti = ({
             >
               <Box my={6}>
                 <Heading mb={3} size="md">
-                  {titles[pc1].am}
+                  {titles[firstParentChildBinary].am}
                 </Heading>
                 <UnorderedList>
                   {results[firstMbtiType].am.map((r, index) => {
@@ -174,7 +150,7 @@ const ResultsMbti = ({
               </Box>
               <Box my={6}>
                 <Heading mb={3} size="md">
-                  {titles[pc1].will}
+                  {titles[firstParentChildBinary].will}
                 </Heading>
                 <UnorderedList>
                   {results[firstMbtiType].will.map((r, index) => {
@@ -188,7 +164,7 @@ const ResultsMbti = ({
               </Box>
               <Box my={6}>
                 <Heading mb={3} size="md">
-                  {titles[pc1].hard}
+                  {titles[firstParentChildBinary].hard}
                 </Heading>
                 <UnorderedList>
                   {results[firstMbtiType].hard.map((r, index) => {
@@ -204,7 +180,7 @@ const ResultsMbti = ({
           </Box>
           <Box textAlign="center">
             <Heading textAlign="center" size="lg">
-              {titles[pc2].title}
+              {titles[secondParentChildBinary].title}
             </Heading>
             <Heading textAlign="center" size="xl">
               {secondMbtiType}
@@ -227,7 +203,7 @@ const ResultsMbti = ({
             >
               <Box my={6}>
                 <Heading mb={3} size="md">
-                  {titles[pc2].am}
+                  {titles[secondParentChildBinary].am}
                 </Heading>
                 <UnorderedList>
                   {results[secondMbtiType].am.map((r, index) => {
@@ -243,7 +219,7 @@ const ResultsMbti = ({
               </Box>
               <Box my={6}>
                 <Heading mb={3} size="md">
-                  {titles[pc2].will}
+                  {titles[secondParentChildBinary].will}
                 </Heading>
                 <UnorderedList>
                   {results[secondMbtiType].will.map((r, index) => {
@@ -259,7 +235,7 @@ const ResultsMbti = ({
               </Box>
               <Box my={6}>
                 <Heading mb={3} size="md">
-                  {titles[pc2].hard}
+                  {titles[secondParentChildBinary].hard}
                 </Heading>
                 <UnorderedList>
                   {results[secondMbtiType].hard.map((r, index) => {
@@ -278,7 +254,7 @@ const ResultsMbti = ({
           <DiffPC a={firstAnswers} b={secondAnswers} />
         </VStack>
         <ResultShare
-          pc={decToBinArr(firstAnswers)[0] === 0 ? "엄마/아빠" : "자녀"}
+          parentChild={secondParentChildBinary ? "엄마/아빠" : "자녀"}
           url={`https://mfd-mbti.vercel.app/${router.asPath}`}
           heading="한테도 결과 알려주기!"
         />

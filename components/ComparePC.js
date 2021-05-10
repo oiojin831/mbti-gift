@@ -1,17 +1,6 @@
-import {
-  Divider,
-  Flex,
-  VStack,
-  Box,
-  Heading,
-  Stack,
-  Text,
-  UnorderedList,
-  Center,
-  ListItem,
-} from "@chakra-ui/react";
+import { Divider, Flex, VStack, Box, Heading, Stack, Text, UnorderedList, Center, ListItem } from "@chakra-ui/react"; // prettier-ignore
 import { decToBinArr } from "../helpers/crypto";
-import { mfdQSheet1 } from "../data";
+import { mcqs } from "../data";
 
 const DiffPC = ({ a, b }) => {
   const pcA = decToBinArr(a);
@@ -19,7 +8,7 @@ const DiffPC = ({ a, b }) => {
 
   const diffQ = getIndexIfFalse(
     compareTwo(decToBinArr(a), decToBinArr(b)),
-    mfdQSheet1
+    mcqs
   ).slice(1);
   if (diffQ.length === 0) {
     return (
@@ -76,7 +65,7 @@ const DiffPC = ({ a, b }) => {
 const ComparePC = ({ a, b }) => {
   const diffArrLast = getIndexIfFalse(
     compareTwo(decToBinArr(a), decToBinArr(b)),
-    mfdQSheet1
+    mcqs
   ).slice(1);
   console.log("diff slice", diffArrLast);
 
@@ -103,7 +92,6 @@ export { ComparePC, DiffPC };
 
 const compareTwo = (firstArr, secondArr) => {
   const diffArr = firstArr.map((ele, index) => ele === secondArr[index]);
-  console.log("diffarr in compretwo", diffArr);
   return diffArr;
 };
 
