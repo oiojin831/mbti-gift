@@ -28,7 +28,7 @@ const SurveyPage = ({ mcqs }) => {
   const pageData = mcqs[state.page];
 
   const saveData = async () => {
-    const docRef = await addDoc(collection(db, "testSurvey"), {
+    const docRef = await addDoc(collection(db, "firstSurvey"), {
       mbti: state.mbti.split("-")[0],
       answers: state.answerList,
       createdAt: Timestamp.fromDate(new Date()),

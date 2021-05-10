@@ -67,7 +67,6 @@ const ComparePC = ({ a, b }) => {
     compareTwo(decToBinArr(a), decToBinArr(b)),
     mcqs
   ).slice(1);
-  console.log("diff slice", diffArrLast);
 
   return (
     <>
