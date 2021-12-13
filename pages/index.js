@@ -1,32 +1,29 @@
-import Link from "next/link";
-import { Container, VStack, Stack, Box, Button, Heading, Text, Link as ChakraLink } from "@chakra-ui/react"; // prettier-ignore
-import { MetaData, Header, HeroImage, MainShare } from "../components";
-import { homePage } from "../data";
+import Link from 'next/link';
+import { Container, VStack, Text } from '@chakra-ui/react';
+import { MetaData, Header, HeroImage } from '../components';
 
 export default function HomePage() {
   return (
     <Container p={0}>
       <MetaData />
-      <Header />
+      <Header title="기념일 MBTI" />
       <VStack spacing={7} align="stretch">
-        <Box>
-          <HeroImage />
-        </Box>
-        <VStack spacing={7} align="center">
-          <Stack spacing={3}>
-            <Heading>{homePage.heading1}</Heading>
-            <Text textAlign="center" fontSize="lg" fontWeight="bold">
-              {homePage.description1}
+        <Link href="/mfd-mbti" passHref>
+          <a>
+            <HeroImage src="/mfd-main.jpeg" />
+            <Text textAlign="center" fontSize="4xl">
+              어버이날 mbti
             </Text>
-            <Text textAlign="center" fontSize="lg" fontWeight="bold">
-              {homePage.description2}
+          </a>
+        </Link>
+        <Link href="/christmas-mbti" passHref>
+          <a>
+            <HeroImage src="/entp.png" />
+            <Text textAlign="center" fontSize="4xl">
+              크리스마스 mbti
             </Text>
-          </Stack>
-          <Link href="/survey" passHref>
-            <Button colorScheme="brand">테스트 시작하기</Button>
-          </Link>
-        </VStack>
-        <MainShare heading="테스트 공유하기!" />
+          </a>
+        </Link>
       </VStack>
     </Container>
   );

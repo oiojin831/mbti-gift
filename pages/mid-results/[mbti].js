@@ -1,20 +1,20 @@
 import { Container, VStack, Box, Button, Flex, Heading, UnorderedList, ListItem } from "@chakra-ui/react"; // prettier-ignore
-import { useRouter } from "next/router";
-import Image from "next/image";
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 
-import { Header, MainShare, ResultShare } from "../../components";
+import { Header, MainShare, ResultShare } from '../../components';
 
-import { decToBinArr } from "../../helpers/crypto";
-import { results, titles } from "../../data";
+import { decToBinArr } from '../../helpers/crypto';
+import { results, titles } from '../../data';
 
 export async function getStaticPaths() {
-  const paths = [{ params: { mbti: "INFP-4127" } }];
+  const paths = [{ params: { mbti: 'INFP-4127' } }];
 
   return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params }) {
-  const splitted = params.mbti.split("-");
+  const splitted = params.mbti.split('-');
   if (splitted) {
     const mbtiType = splitted[0];
     const answerList = splitted[1];
@@ -40,7 +40,7 @@ const MidResult = ({ mbtiType, parentChildBinary, results, titles }) => {
 
   return (
     <Container p={0}>
-      <Header />
+      <Header title="어버이날 MBTI" />
       <VStack m={3} spacing={4} align="stretch">
         <Box textAlign="center">
           <Heading textAlign="center" size="lg">
@@ -110,7 +110,7 @@ const MidResult = ({ mbtiType, parentChildBinary, results, titles }) => {
           </Flex>
         </Box>
         <ResultShare
-          parentChild={parentChildBinary === 0 ? "자녀" : "엄마/아빠"}
+          parentChild={parentChildBinary === 0 ? '자녀' : '엄마/아빠'}
           url={`https://mfd-mbti.vercel.app/survey/${router.query.mbti}`}
           heading=" 테스트 시켜서 확인하기!"
         />

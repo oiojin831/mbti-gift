@@ -1,23 +1,23 @@
-import Image from "next/image";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Image from 'next/image';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Link as ChakraLink, SimpleGrid, Container, Flex, UnorderedList, ListItem, VStack, Box, Heading } from "@chakra-ui/react"; // prettier-ignore
 import { Footer, ResultShare, MainShare, ComparePC, DiffPC, Header } from "../../components"; // prettier-ignore
-import { mcqs, results, titles } from "../../data";
-import { decToBinArr } from "../../helpers/crypto";
+import { mcqs, results, titles } from '../../data';
+import { decToBinArr } from '../../helpers/crypto';
 
 export async function getStaticPaths() {
-  const paths = [{ params: { mbti: "INFP-4127-INFP-4127" } }];
+  const paths = [{ params: { mbti: 'INFP-4127-INFP-4127' } }];
 
   return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params }) {
-  const firstMbtiType = params.mbti.split("-")[0];
-  const firstAnswers = params.mbti.split("-")[1];
-  const secondMbtiType = params.mbti.split("-")[2];
-  const secondAnswers = params.mbti.split("-")[3];
+  const firstMbtiType = params.mbti.split('-')[0];
+  const firstAnswers = params.mbti.split('-')[1];
+  const secondMbtiType = params.mbti.split('-')[2];
+  const secondAnswers = params.mbti.split('-')[3];
   const firstParentChildBinary = decToBinArr(firstAnswers)[0];
   const secondParentChildBinary = decToBinArr(secondAnswers)[0];
 
@@ -66,7 +66,7 @@ const ResultsMbti = ({
           content="https://mfd-mbti.vercel.app/_next/image?url=%2Fmain.jpeg&w=3840&q=75"
         />
       </Head>
-      <Header />
+      <Header title="어버이날 MBTI" />
       <VStack m={4} pb={12} spacing={7} align="stretch">
         <SimpleGrid columns={2} spacingX="40px" spacingY="20px">
           <Box textAlign="center">
@@ -254,7 +254,7 @@ const ResultsMbti = ({
           <DiffPC a={firstAnswers} b={secondAnswers} />
         </VStack>
         <ResultShare
-          parentChild={secondParentChildBinary ? "엄마/아빠" : "자녀"}
+          parentChild={secondParentChildBinary ? '엄마/아빠' : '자녀'}
           url={`https://mfd-mbti.vercel.app/${router.asPath}`}
           heading="한테도 결과 알려주기!"
         />

@@ -1,13 +1,13 @@
-import { useReducer, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useReducer, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { Heading, Center, Spacer, Container, Box, Flex, VStack } from "@chakra-ui/react"; // prettier-ignore
 
 import { QuestionSlider, DirectionButton, Header, MetaData } from "../../components"; // prettier-ignore
-import { mcqs } from "../../data";
-import reducer from "../../reducer/pageReducer";
+import { mcqs } from '../../data';
+import reducer from '../../reducer/pageReducer';
 
-import { db } from "../../libs/firebase";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { db } from '../../libs/firebase';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 export async function getStaticProps() {
   return {
@@ -19,7 +19,7 @@ const initialState = {
   page: 0,
   answerList: [],
   isLast: false,
-  mbti: "",
+  mbti: '',
 };
 
 const SurveyPage = ({ mcqs }) => {
@@ -28,15 +28,15 @@ const SurveyPage = ({ mcqs }) => {
   const pageData = mcqs[state.page];
 
   const saveData = async () => {
-    const docRef = await addDoc(collection(db, "firstSurvey"), {
-      mbti: state.mbti.split("-")[0],
+    const docRef = await addDoc(collection(db, 'firstSurvey'), {
+      mbti: state.mbti.split('-')[0],
       answers: state.answerList,
       createdAt: Timestamp.fromDate(new Date()),
     });
   };
 
   useEffect(() => {
-    if (state.mbti !== "") {
+    if (state.mbti !== '') {
       saveData();
       router.push({
         pathname: `/mid-results/${state.mbti}`,
@@ -47,7 +47,7 @@ const SurveyPage = ({ mcqs }) => {
   return (
     <Container p={0} h="100vh" overflowY="hidden">
       <MetaData />
-      <Header />
+      <Header title="어버이날 MBTI" />
       <Flex py={4}>
         <DirectionButton
           dispatch={dispatch}

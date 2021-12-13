@@ -1,25 +1,25 @@
-import { useReducer, useEffect } from "react";
-import { useRouter } from "next/router";
-import Head from "next/head";
+import { useReducer, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 import { Heading, Center, Spacer, Container, Box, Flex, VStack } from "@chakra-ui/react"; // prettier-ignore
 
 import { QuestionSlider, DirectionButton, Header } from "../../components"; // prettier-ignore
-import { mcqs } from "../../data";
-import reducer from "../../reducer/pageReducer";
+import { mcqs } from '../../data';
+import reducer from '../../reducer/pageReducer';
 
-import { decToBinArr } from "../../helpers/crypto";
+import { decToBinArr } from '../../helpers/crypto';
 
-import { db } from "../../libs/firebase";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { db } from '../../libs/firebase';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 export async function getStaticPaths() {
-  const paths = [{ params: { mbti: "INFP-4127" } }];
+  const paths = [{ params: { mbti: 'INFP-4127' } }];
 
   return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params }) {
-  const prevAnswerList = params.mbti.split("-")[1];
+  const prevAnswerList = params.mbti.split('-')[1];
   const isParent = decToBinArr(prevAnswerList)[0] === 0 ? true : false;
 
   return {
@@ -32,7 +32,7 @@ const initialState = {
   page: 0,
   answerList: [],
   isLast: false,
-  mbti: "",
+  mbti: '',
 };
 
 const SurveyMbti = ({ mcqs, prevMbti, prevAnswerList, isParent }) => {
@@ -46,17 +46,17 @@ const SurveyMbti = ({ mcqs, prevMbti, prevAnswerList, isParent }) => {
   const pageData = mcqs[state.page];
 
   const saveData = async () => {
-    const docRef = await addDoc(collection(db, "secondSurvey"), {
-      mbti1: prevMbti.split("-")[0],
+    const docRef = await addDoc(collection(db, 'secondSurvey'), {
+      mbti1: prevMbti.split('-')[0],
       ansers1: prevAnswerList,
-      mbti2: state.mbti.split("-")[0],
+      mbti2: state.mbti.split('-')[0],
       answers2: state.answerList,
       createdAt: Timestamp.fromDate(new Date()),
     });
   };
 
   useEffect(() => {
-    if (state.mbti !== "") {
+    if (state.mbti !== '') {
       saveData();
       router.push({
         pathname: `/results/${prevMbti}-${state.mbti}`,
@@ -83,7 +83,7 @@ const SurveyMbti = ({ mcqs, prevMbti, prevAnswerList, isParent }) => {
           content="https://mfd-mbti.vercel.app/_next/image?url=%2Fmain.jpeg&w=3840&q=75"
         />
       </Head>
-      <Header />
+      <Header title="어버이날 MBTI" />
       <Flex py={4}>
         <DirectionButton
           dispatch={dispatch}

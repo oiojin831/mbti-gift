@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-const HeroImage = () => {
+const HeroImage = ({ src }) => {
   return (
     <Image
-      src="/main.jpeg"
+      src={src}
       alt="parent's day"
       layout="responsive"
       width={500}
